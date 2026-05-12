@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>AI 도입 전략 보고 — 산하에코종합건설</title>
+<style>
+@font-face { font-family: 'NS'; src: url('NanumSquareL.ttf'); font-weight: 300; }
+@font-face { font-family: 'NS'; src: url('NanumSquareR.ttf'); font-weight: 400; }
+@font-face { font-family: 'NS'; src: url('NanumSquareB.ttf'); font-weight: 700; }
+@font-face { font-family: 'NS'; src: url('NanumSquareEB.ttf'); font-weight: 800; }
+
+:root {
+  --navy: #0d1b3e;
+  --green: #45b649;
+  --blue: #1e88e5;
+  --grad: linear-gradient(135deg, #45b649 0%, #1e88e5 100%);
+  --grad90: linear-gradient(90deg, #45b649 0%, #1e88e5 100%);
+  --text: #0d1b3e;
+  --muted: #607d8b;
+  --border: #dde4ed;
+  --light: #f5f7fa;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'NS', 'Malgun Gothic', sans-serif;
+  background: #080e1c;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px 16px 16px;
+}
+
+/* Presentation wrapper */
+.pres {
+  width: 1280px;
+  transform-origin: top center;
+  flex-shrink: 0;
+}
+
+/* Slides */
+.slide {
+  display: none;
+  width: 1280px;
+  height: 720px;
+  background: #fff;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 32px 80px rgba(0,0,0,0.7);
+}
+.slide.active { display: block; }
+
+/* Logo badge top-right */
+.logo {
+  position: absolute;
+  top: 18px;
+  right: 22px;
+  width: 58px;
+  height: 58px;
+  background: #000;
+  border-radius: 8px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.logo img { width: 100%; height: 100%; object-fit: contain; }
+
+/* Page number */
+.pnum {
+  position: absolute;
+  bottom: 16px;
+  right: 24px;
+  font-size: 11px;
+  color: var(--muted);
+  font-weight: 400;
+  letter-spacing: 0.06em;
+}
+
+/* Section tag */
+.stag {
+  display: inline-block;
+  background: var(--grad);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  padding: 3px 11px;
+  border-radius: 2px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+/* Navigation */
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 14px;
+}
+.nbtn {
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.14);
+  color: rgba(255,255,255,0.75);
+  padding: 8px 22px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: 'NS', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  transition: background 0.15s;
+}
+.nbtn:hover:not(:disabled) { background: rgba(255,255,255,0.14); }
+.nbtn:disabled { opacity: 0.22; cursor: not-allowed; }
+.ncnt {
+  color: rgba(255,255,255,0.35);
+  font-family: 'NS', sans-serif;
+  font-size: 12px;
+  min-width: 60px;
+  text-align: center;
+}
+.prog-wrap {
+  width: 1280px;
+  height: 3px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 2px;
+  margin-top: 10px;
+  overflow: hidden;
+}
+.prog-fill {
+  height: 100%;
+  background: var(--grad90);
+  border-radius: 2px;
+  transition: width 0.35s ease;
+}
+
+/* ===================== SLIDE INNER LAYOUT ===================== */
+.si {
+  padding: 38px 56px 36px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.sh { margin-bottom: 20px; }
+.st {
+  font-size: 27px;
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  margin-bottom: 5px;
+}
+.ss {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+/* Callout row */
+.cr {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+.co {
+  flex: 1;
+  background: var(--light);
+  border-radius: 10px;
+  padding: 16px 18px;
+  text-align: center;
+  position: relative;
+}
+.co::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--grad90);
+  border-radius: 10px 10px 0 0;
+}
+.cv {
+  font-size: 32px;
+  font-weight: 800;
+  background: var(--grad);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1.1;
+  margin-bottom: 5px;
+}
+.cl {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+}
+
+/* Two columns */
+.tc { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; flex: 1; }
+
+/* Section label */
+.slb {
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+/* Red indicator items */
+.ri {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 9px 13px;
+  background: var(--light);
+  border-radius: 6px;
+  margin-bottom: 7px;
+}
+.rd {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #e53935;
+  margin-top: 4px;
+  flex-shrink: 0;
+}
+.rt { font-size: 12px; font-weight: 700; color: var(--text); line-height: 1.45; }
+.rt span { font-weight: 400; color: var(--muted); display: block; font-size: 11px; margin-top: 2px; }
+
+/* Highlight box */
+.hb {
+  background: linear-gradient(135deg, rgba(69,182,73,0.07), rgba(30,136,229,0.09));
+  border: 1px solid rgba(30,136,229,0.2);
+  border-radius: 8px;
+  padding: 13px 20px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1.6;
+  text-align: center;
+  margin-top: 12px;
+}
+
+/* Cards */
+.card-row { display: flex; gap: 14px; flex: 1; }
+.card {
+  flex: 1;
+  background: var(--light);
+  border-radius: 10px;
+  padding: 20px;
+  position: relative;
+}
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  border-radius: 10px 10px 0 0;
+}
+.card:nth-child(1)::before { background: #45b649; }
+.card:nth-child(2)::before { background: #1e88e5; }
+.card:nth-child(3)::before { background: #8e24aa; }
+.ct { font-size: 13px; font-weight: 800; color: var(--text); margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1px solid var(--border); line-height: 1.4; }
+.cb { font-size: 12px; font-weight: 400; color: var(--text); line-height: 1.75; }
+.cb strong { font-weight: 800; }
+
+/* Blue left border box */
+.bb {
+  background: var(--light);
+  border-radius: 8px;
+  padding: 13px 15px;
+  border-left: 3px solid var(--blue);
+  margin-bottom: 10px;
+}
+
+/* Bullet list */
+.blist { font-size: 11px; font-weight: 400; color: var(--muted); line-height: 1.8; }
+.blist li { list-style: none; padding-left: 14px; position: relative; margin-bottom: 3px; }
+.blist li::before { content: '·'; position: absolute; left: 0; font-weight: 800; color: var(--green); font-size: 14px; line-height: 1.4; }
+.blist li.bold { font-weight: 700; color: var(--navy); }
+
+/* Small card (camfit lessons) */
+.sc { background: var(--light); border-radius: 7px; padding: 10px 13px; margin-bottom: 7px; }
+.sc:last-child { margin-bottom: 0; }
+.sct { font-size: 11px; font-weight: 800; color: var(--text); margin-bottom: 3px; }
+.scd { font-size: 11px; color: var(--muted); line-height: 1.55; }
+
+/* Before/After table */
+.bat { width: 100%; border-collapse: collapse; font-size: 12px; margin-bottom: 12px; }
+.bat th { padding: 9px 14px; font-weight: 800; font-size: 11px; }
+.bat th.bef { background: var(--light); color: var(--muted); width: 36%; text-align: center; }
+.bat th.arr { background: transparent; width: 7%; text-align: center; }
+.bat th.aft { background: var(--navy); color: #fff; text-align: center; }
+.bat td { padding: 8px 14px; border-bottom: 1px solid var(--border); vertical-align: middle; line-height: 1.4; }
+.bat td.bef { color: var(--muted); text-align: center; font-size: 11px; }
+.bat td.arr { text-align: center; color: var(--muted); font-size: 15px; }
+.bat td.aft { font-weight: 700; color: var(--blue); text-align: center; font-size: 11px; }
+.bat tr:nth-child(odd) td { background: rgba(0,0,0,0.02); }
+.bat tr:last-child td { border-bottom: none; }
+
+/* Effect grid */
+.eg { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.ec { background: var(--light); border-radius: 8px; padding: 14px 15px; position: relative; }
+.ec::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; border-radius: 8px 8px 0 0; }
+.ec:nth-child(1)::before { background: var(--green); }
+.ec:nth-child(2)::before { background: var(--blue); }
+.ec:nth-child(3)::before { background: #8e24aa; }
+.ect { font-size: 12px; font-weight: 800; color: var(--text); margin-bottom: 7px; }
+.ecb { font-size: 11px; color: var(--muted); line-height: 1.6; }
+
+/* Final dark box */
+.fb {
+  background: var(--navy);
+  border-radius: 8px;
+  padding: 12px 22px;
+  text-align: center;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.7;
+  margin-top: 10px;
+}
+.fb span {
+  background: var(--grad);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Phase row */
+.pr { display: flex; gap: 9px; flex: 1; }
+.pc {
+  flex: 1;
+  border-radius: 10px;
+  padding: 15px 14px;
+  display: flex;
+  flex-direction: column;
+}
+.pc.p0 { background: #e8f5e9; }
+.pc.p1 { background: #e3f2fd; }
+.pc.p2 { background: #f3e5f5; }
+.pc.p3 { background: #fff3e0; }
+.pc.pg { background: var(--navy); }
+.pb { font-size: 9px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+.pc.pg .pb { color: rgba(255,255,255,0.45); }
+.pn { font-size: 13px; font-weight: 800; color: var(--text); margin-bottom: 3px; line-height: 1.3; }
+.pc.pg .pn { color: #fff; }
+.pp { font-size: 10px; color: var(--muted); margin-bottom: 10px; padding-bottom: 9px; border-bottom: 1px solid rgba(0,0,0,0.08); }
+.pc.pg .pp { color: rgba(255,255,255,0.38); border-color: rgba(255,255,255,0.1); }
+.pi { font-size: 10.5px; color: var(--text); line-height: 1.8; flex: 1; }
+.pc.pg .pi { color: rgba(255,255,255,0.68); }
+.pi li { list-style: none; padding-left: 11px; position: relative; margin-bottom: 2px; }
+.pi li::before { content: '·'; position: absolute; left: 0; font-weight: 800; }
+.pbg { margin-top: 9px; padding-top: 8px; border-top: 1px solid rgba(0,0,0,0.08); font-size: 10px; font-weight: 700; color: var(--blue); }
+.pc.pg .pbg { color: #a5d6a7; border-color: rgba(255,255,255,0.1); }
+
+/* Step list */
+.stpl { display: flex; flex-direction: column; gap: 12px; flex: 1; }
+.stpi { display: flex; gap: 14px; align-items: flex-start; padding: 13px 15px; background: var(--light); border-radius: 8px; }
+.stpb { padding: 3px 10px; border-radius: 10px; font-size: 10px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; white-space: nowrap; flex-shrink: 0; margin-top: 1px; }
+.stpb.s1 { background: #e8f5e9; color: #2e7d32; }
+.stpb.s2 { background: #e3f2fd; color: #1565c0; }
+.stpb.s3 { background: #fff3e0; color: #e65100; }
+.stpb.s4 { background: #fce4ec; color: #c62828; }
+.stptit { font-size: 13px; font-weight: 800; color: var(--text); margin-bottom: 4px; }
+.stpdesc { font-size: 11px; color: var(--muted); line-height: 1.6; }
+
+/* Data table */
+.dt { width: 100%; border-collapse: collapse; font-size: 12px; }
+.dt th { background: var(--navy); color: #fff; padding: 9px 13px; font-weight: 700; font-size: 11px; text-align: left; }
+.dt td { padding: 8px 13px; border-bottom: 1px solid var(--border); color: var(--text); line-height: 1.45; vertical-align: top; }
+.dt tr:nth-child(even) td { background: var(--light); }
+.dt tr:last-child td { border-bottom: none; }
+
+/* Decision grid */
+.dg { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; flex: 1; }
+.dc { background: var(--light); border-radius: 10px; padding: 16px 18px; display: flex; flex-direction: column; gap: 9px; }
+.dn { width: 26px; height: 26px; border-radius: 50%; background: var(--grad); color: #fff; font-size: 12px; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.dtit { font-size: 13px; font-weight: 800; color: var(--text); }
+.dact { font-size: 11px; font-weight: 700; color: var(--blue); background: rgba(30,136,229,0.09); padding: 7px 10px; border-radius: 5px; line-height: 1.5; }
+.dwhy { font-size: 11px; font-weight: 400; color: var(--muted); line-height: 1.6; }
+.mt { width: 100%; border-collapse: collapse; font-size: 11px; }
+.mt th { background: var(--navy); color: #fff; padding: 5px 9px; font-weight: 700; text-align: left; }
+.mt td { padding: 5px 9px; border-bottom: 1px solid var(--border); color: var(--text); }
+.mt tr:last-child td { border-bottom: none; }
+.mt tr:nth-child(even) td { background: rgba(0,0,0,0.03); }
+
+/* TOC */
+.toc-g { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.ti {
+  display: flex; align-items: center; gap: 14px;
+  padding: 14px 18px;
+  background: var(--light);
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+}
+.ti::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: var(--grad90);
+}
+.tinum { font-size: 22px; font-weight: 800; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; min-width: 30px; }
+.tilb { font-size: 13px; font-weight: 800; color: var(--text); }
+.tisb { font-size: 11px; font-weight: 400; color: var(--muted); margin-top: 2px; }
+
+/* Impl grid (2 cols in camfit) */
+.ig { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 11px; }
+.ih {
+  background: linear-gradient(135deg, rgba(69,182,73,0.08), rgba(30,136,229,0.08));
+  border: 1px solid rgba(30,136,229,0.18);
+  border-radius: 8px;
+  padding: 12px 15px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1.6;
+}
+
+/* ===================== COVER SLIDE ===================== */
+#s1 { background: var(--navy); }
+.cover-bg {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse at 75% 15%, rgba(69,182,73,0.14) 0%, transparent 45%),
+    radial-gradient(ellipse at 25% 85%, rgba(30,136,229,0.16) 0%, transparent 45%),
+    radial-gradient(ellipse at 50% 50%, rgba(255,255,255,0.02) 0%, transparent 60%);
+}
+.cover-c {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center;
+}
+.cover-logo {
+  width: 96px; height: 96px;
+  background: #000;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 28px;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+.cover-logo img { width: 100%; height: 100%; object-fit: contain; }
+.cover-eyebrow {
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+  margin-bottom: 14px;
+}
+.cover-title {
+  font-size: 54px; font-weight: 800;
+  color: #fff; line-height: 1.15;
+  letter-spacing: -0.02em; margin-bottom: 4px;
+}
+.cover-title .grad {
+  background: var(--grad);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.cover-line { width: 56px; height: 2px; background: var(--grad90); margin: 22px auto; border-radius: 1px; }
+.cover-org { font-size: 15px; font-weight: 700; color: rgba(255,255,255,0.55); margin-bottom: 6px; }
+.cover-date { font-size: 12px; font-weight: 300; color: rgba(255,255,255,0.28); letter-spacing: 0.12em; }
+</style>
+</head>
+<body>
+
+<div class="pres" id="pres">
+
+<!-- ======= S1: COVER ======= -->
+<div class="slide active" id="s1">
+  <div class="cover-bg"></div>
+  <div class="cover-c">
+    <div class="cover-logo"><img src="sanha_logo.png" alt="SANHA"></div>
+    <div class="cover-eyebrow">경영기획실 보고</div>
+    <div class="cover-title">AI <span class="grad">도입 전략</span> 보고</div>
+    <div class="cover-line"></div>
+    <div class="cover-org">(주)산하에코종합건설 · 경영기획실</div>
+    <div class="cover-date">2026. 05</div>
+  </div>
+  <div class="pnum" style="color:rgba(255,255,255,0.2);">1 / 10</div>
+</div>
+
+<!-- ======= S2: 목차 ======= -->
+<div class="slide" id="s2">
+  <div class="logo"><img src="sanha_logo.png"></div>
+  <div class="si">
+    <div class="sh">
+      <div class="stag">Contents</div>
+      <div class="st">목차</div>
+    </div>
+    <div class="toc-g">
+      <div class="ti"><div class="tinum">01</div><div><div class="tilb">보고 요지</div><div class="tisb">핵심 메시지 3가지</div></div></div>
+      <div class="ti"><div class="tinum">02</div><div><div class="tilb">현황 진단</div><div class="tisb">우리는 지금 어디에 있는가</div></div></div>
+      <div class="ti"><div class="tinum">03</div><div><div class="tilb">벤치마크 — 캠핏 인터뷰</div><div class="tisb">AI를 실제로 작동시킨 기업은 무엇이 달랐는가</div></div></div>
+      <div class="ti"><div class="tinum">04</div><div><div class="tilb">AI 건설 기업이 된다면</div><div class="tisb">기회와 효과</div></div></div>
+      <div class="ti"><div class="tinum">05</div><div><div class="tilb">단계별 실행 계획</div><div class="tisb">0단계 → 궁극적 목표</div></div></div>
+      <div class="ti"><div class="tinum">06</div><div><div class="tilb">전사 데이터 체계화</div><div class="tisb">장기 경쟁력의 기반</div></div></div>
+      <div class="ti" style="grid-column: 1 / 2;"><div class="tinum">07</div><div><div class="tilb">의사결정 요청사항</div><div class="tisb">지금 결정이 필요한 4가지</div></div></div>
+    </div>
+  </div>
+  <div class="pnum">2 / 10</div>
+</div>
+
+<!-- ======= S3: 보고 요지 ======= -->
+<div class="slide" id="s3">
+  <div class="logo"><img src="sanha_logo.png"></div>
+  <div class="si">
+    <div class="sh">
+      <div class="stag">챕터 01</div>
+      <div class="st">보고 요지</div>
+      <div class="ss">이 보고서의 핵심 메시지 3가지</div>
+    </div>
+    <div class="card-row">
+      <div class="card">
+        <div class="ct">① AI의 1차 목표 = 업무 효율화</div>
+        <div class="cb">
+          AI 도입의 1차 목표는 매출 증대가 아닙니다.<br><br>
+          건설업은 IT업과 달리 AI가 즉각적인 매출로 연결되지 않습니다.<br><br>
+          먼저 직원 개개인의 <strong>업무 부담 감소 · 업무 시간 단축</strong>을 목표로 설정해야 합니다.
+        </div>
+      </div>
+      <div class="card">
+        <div class="ct">② 도구 도입이 아닌 일하는 방식의 전환</div>
+        <div class="cb">
+          AI 도입은 단순한 IT 도구 도입이 아닙니다.<br><br>
+          이 전환은 반드시 <strong>경영진부터 시작</strong>되어야 합니다.<br><br>
+          임원이 먼저 쓰지 않으면 직원은 AI 결과물과 기존 보고서를 동시에 만드는 <strong>이중일</strong>을 떠안게 됩니다.
+        </div>
+      </div>
+      <div class="card">
+        <div class="ct">③ 명확한 투자가 반드시 필요합니다</div>
+        <div class="cb">
+          의지만으로는 작동하지 않습니다.<br><br>
+          <strong>도구 · 예산 · 교육</strong>의 3가지가 동시에 갖춰져야 합니다.<br><br>
+          현재 경쟁사들은 이미 움직이고 있으며, 지금이 가장 낮은 비용으로 시작할 수 있는 시점입니다.
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pnum">3 / 10</div>
+</div>
+
+<!-- ======= S4: 현황 진단 ======= -->
+<div class="slide" id="s4">
+  <div class="logo"><img src="sanha_logo.png"></div>
+  <div class="si">
+    <div class="sh">
+      <div class="stag">챕터 02</div>
+      <div class="st">현황 진단 — 우리는 지금 어디에 있는가</div>
+      <div class="ss">직원의 의지 문제가 아니라 시스템의 문제입니다</div>
+    </div>
+    <div class="cr">
+      <div class="co"><div class="cv">0원</div><div class="cl">AI 도구 구독 예산</div></div>
+      <div class="co"><div class="cv">0회</div><div class="cl">임원 AI 교육 횟수</div></div>
+      <div class="co"><div class="cv">없음</div><div class="cl">전사 AI 활용 가이드라인</div></div>
+    </div>
+    <div class="tc">
+      <div>
+        <div class="slb">전 임직원의 공통 문제</div>
+        <div class="bb">
+          <div style="font-size:13px; font-weight:700; color:var(--navy); line-height:1.6;">무엇을 · 어떻게 · 어떤 도구로<br>해야 하는지 방향이 없습니다</div>
+        </div>
+        <ul class="blist">
+          <li>AI 도구 구독, 교육 예산, 학습 시간 — 세 가지 모두 회사 차원 지원 없음</li>
+          <li>"AI를 활용해라"는 지시는 있으나 목표·기준·도구 모두 미정</li>
+        </ul>
+      </div>
+      <div>
+        <div class="slb">구조적 원인 4가지</div>
+        <div class="ri"><div class="rd"></div><div class="rt">목표 부재<span>매출인지 효율인지 품질인지 정의 없음</span></div></div>
+        <div class="ri"><div class="rd"></div><div class="rt">투자 부재<span>도구·교육·시간 모두 미지원</span></div></div>
+        <div class="ri"><div class="rd"></div><div class="rt">탑다운 부재<span>임원 선행 없이 직원에게만 요구 → 이중일 발생</span></div></div>
+        <div class="ri"><div class="rd"></div><div class="rt">건설업 특수성 미반영<span>즉각적 매출 효과 기대는 건설업 현실과 불일치</span></div></div>
+      </div>
+    </div>
+    <div class="hb">현재 구조가 지속되면 6개월 후에도 아무것도 달라지지 않습니다</div>
+  </div>
+  <div class="pnum">4 / 10</div>
+</div>
+
+<!-- ======= S5: 캠핏 ======= -->
+<div class="slide" id="s5">
+  <div class="logo"><img src="sanha_logo.png"></div>
+  <div class="si">
+    <div class="sh">
+      <div class="stag">챕터 03</div>
+      <div class="st">벤치마크 — 캠핏 인터뷰 시사점</div>
+      <div class="ss">AI를 실제로 작동시킨 기업은 무엇이 달랐는가 · 2026.05.08 캠핏 대표 인터뷰</div>
+    </div>
+    <div class="cr" style="margin-bottom:14px;">
+      <div class="co"><div class="cv">1위</div><div class="cl">캠핑장 예약 플랫폼 (국내)</div></div>
+      <div class="co"><div class="cv">1,500만원+</div><div class="cl">월 AI 구독료</div></div>
+      <div class="co"><div class="cv">Claude</div><div class="cl">주요 도구 (엔터프라이즈)</div></div>
+    </div>
+    <div class="tc">
+      <div>
+        <div class="slb">캠핏의 일하는 방식</div>
+        <div style="background:var(--light); border-radius:8px; padding:13px 15px;">
+          <ul class="blist">
+            <li>별도 보고서 없음 — 노션 정리본이 곧 보고서</li>
+            <li>슬랙 기반 실시간 공유 → 전자결재 없이 의사결정·업무 동시 진행</li>
+            <li>회의 최소화</li>
+            <li>비개발자 직원도 AI 자동화를 통해 업무 처리</li>
+            <li class="bold">인턴사원이 이전 대리·과장급 업무를 담당 — AI가 역량의 한계를 확장</li>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <div class="slb">IT업계에서 직접 얻은 교훈</div>
+        <div class="sc"><div class="sct">교훈 1. AI는 효율을 높이지 생산성을 높이지 않는다</div><div class="scd">건설업 1차 목표 = 투입 자원(시간·인력)의 절감</div></div>
+        <div class="sc"><div class="sct">교훈 2. 학습에는 생각보다 많은 시간과 노력이 필요하다</div><div class="scd">양질의 교육·지원 없이는 자발적 학습이 어렵고, AI 활용도가 낮은 직원에게는 진입장벽이 높음</div></div>
+        <div class="sc"><div class="sct">교훈 3. AI 확산은 탑다운이 가장 확실하다</div><div class="scd">임원 선행 없이 직원만 쓰면 이중일 구조 발생 — 경영진이 먼저 받아들여야 직원이 따라옴</div></div>
+      </div>
+    </div>
+    <div class="ig">
+      <div class="ih">💡 <strong>업무 장소의 자유</strong> — Claude 자동화가 정착되면 핸드폰만으로도 주요 업무 처리가 가능합니다</div>
+      <div class="ih">💡 <strong>역량의 확장</strong> — AI는 경험에 관계없이 직원 개개인이 한 단계 위의 업무를 수행하게 합니다</div>
+    </div>
+  </div>
+  <div class="pnum">5 / 10</div>
+</div>
+
+<!-- ======= S6: AI 건설 기업 효과 ======= -->
+<div class="slide" id="s6">
+  <div class="logo"><img src="sanha_logo.png"></div>
+  <div class="si">
+    <div class="sh">
+      <div class="stag">챕터 04</div>
+      <div class="st">AI 건설 기업이 된다면 — 기회와 효과</div>
+      <div class="ss">수주 경쟁력 · 운영 효율 · 데이터 자산 · 조직 역량 — 4가지 영역의 동시 전환</div>
+    </div>
+    <table class="bat">
+      <tr>
+        <th class="bef">현재</th>
+        <th class="arr"></th>
+        <th class="aft">AI 건설 기업</th>
+      </tr>
+      <tr>
+        <td class="bef">담당자 경험·인맥에 수주 의존</td>
+        <td class="arr">→</td>
+        <td class="aft">수주 역량이 조직 자산으로 전환, 담당자 교체에도 재수주율 유지</td>
+      </tr>
+      <tr>
+        <td class="bef">견적에 수일 소요</td>
+        <td class="arr">→</td>
+        <td class="aft">과거 데이터 기반 당일 견적 · 빠른 응답 자체가 발주처 신뢰</td>
+      </tr>
+      <tr>
+        <td class="bef">실적을 말로만 설명</td>
+        <td class="arr">→</td>
+        <td class="aft">공기 준수율·하자율 수치 제시 → 가격이 아닌 실적 경쟁</td>
+      </tr>
+    </table>
+    <div class="eg">
+      <div class="ec">
+        <div class="ect">⚙️ 운영 효율</div>
+        <div class="ecb">현장 리스크 사전 예측 · 공문·보고서 자동 생성 · 같은 인원으로 더 많은 프로젝트 동시 수행 가능</div>
+      </div>
+      <div class="ec">
+        <div class="ect">🔒 데이터 진입장벽</div>
+        <div class="ecb">수년간 쌓인 건설 특화 데이터는 경쟁사가 돈으로도 살 수 없는 자산 · 데이터 격차는 쉽게 좁혀지지 않음</div>
+      </div>
+      <div class="ec">
+        <div class="ect">👥 조직 역량 확장</div>
+        <div class="ecb">담당자 교체에도 지식 유지 · AI 활용도가 낮은 직원도 한 단계 위 업무 수행 · 업무 부담 감소 → 이직률 하락</div>
+      </div>
+    </div>
+    <div class="fb">
+      단기 : <span>업무 부담을 낮추는 회사</span> &nbsp;→&nbsp; 중기 : <span>데이터로 수주하는 회사</span> &nbsp;→&nbsp; 장기 : <span>AI 건설 솔루션 기업</span>
+    </div>
+  </div>
+  <div class="pnum">6 / 10</div>
+</div>
+
+<!-- ======= S7: 실행 계획 ======= -->
+<div class="slide" id="s7">
+  <div class="logo"><img src="sanha_logo.png"></div>
+  <div class="si">
+    <div class="sh">
+      <div class="stag">챕터 05</div>
+      <div class="st">단계별 실행 계획</div>
+      <div class="ss">사전 설문부터 AI 건설 기업까지 — 단계별 로드맵</div>
+    </div>
+    <div class="pr">
+      <div class="pc p0">
+        <div class="pb">0단계 · 즉시 착수</div>
+        <div class="pn">사전 준비</div>
+        <div class="pp">전 임직원 설문조사</div>
+        <ul class="pi">
+          <li>AI 친숙도 파악</li>
+          <li>자동화 필요 업무 취합</li>
+          <li>강의 방향·난이도 결정</li>
+          <li>3개월 후 재설문 비교</li>
+        </ul>
+        <div class="pbg">추가 비용 없음</div>
+      </div>
+      <div class="pc p1">
+        <div class="pb">1단계 · 0~3개월</div>
+        <div class="pn">친밀도 형성</div>
+        <div class="pp">거부감 줄이기 · 도구 정착</div>
+        <ul class="pi">
+          <li>본부별 담당자 지정</li>
+          <li>Claude Pro 구독</li>
+          <li>월 2회 강의 (1~1.5시간)</li>
+          <li>기획실 파일럿 운영</li>
+          <li>월 1회 사례 공유</li>
+        </ul>
+        <div class="pbg">월 약 9만원 추가</div>
+      </div>
+      <div class="pc p2">
+        <div class="pb">2단계 · 3~9개월</div>
+        <div class="pn">업무 적용</div>
+        <div class="pp">반복 업무 효율화 · 전파</div>
+        <ul class="pi">
+          <li>부서별 AI 템플릿 제작</li>
+          <li>전직원 구독 예산 품의</li>
+          <li>AI 리더 공식화</li>
+          <li>월례 미팅 운영</li>
+          <li>보고방식 간소화 시범</li>
+        </ul>
+        <div class="pbg">월 40~60만원</div>
+      </div>
+      <div class="pc p3">
+        <div class="pb">3단계 · 9개월~</div>
+        <div class="pn">Agent 활용</div>
+        <div class="pp">자동화 + 데이터 기반</div>
+        <ul class="pi">
+          <li>Make 자동화 파이프라인</li>
+          <li>Claude Projects AI 비서</li>
+          <li>현장 데이터 체계화</li>
+        </ul>
+        <div class="pbg">월 100만원+ (1인 $100)</div>
+      </div>
+      <div class="pc pg">
+        <div class="pb">궁극적 목표</div>
+        <div class="pn">AI 건설<br>솔루션 기업</div>
+        <div class="pp">장기 비전</div>
+        <ul class="pi">
+          <li>데이터로 수주</li>
+          <li>리스크 사전 예측</li>
+          <li>AI 건설 솔루션</li>
+        </ul>
+        <div class="pbg">경쟁사가 따라올 수 없는 자산</div>
+      </div>
+    </div>
+    <div style="margin-top:11px; font-size:11px; color:var(--muted); text-align:center;">
+      각 단계는 이전 단계의 성과가 쌓여야 다음이 가능합니다 · 0단계 설문부터 시간 절감 기록까지 — 데이터를 남기는 습관이 전체 계획의 기반입니다
+    </div>
+  </div>
+  <div class="pnum">7 / 10</div>
+</div>
+
+<!-- ======= S8: 데이터 체계화 필요성 ======= -->
+<div class="slide" id="s8">
+  <div class="logo"><img src="sanha_logo.png"></div>
+  <div class="si">
+    <div class="sh">
+      <div class="stag">챕터 06</div>
+      <div class="st">전사 데이터 체계화 — 필요성 & 수주 효과</div>
+      <div class="ss">현재 산하에코의 데이터는 '존재하지만 쓸 수 없는' 상태입니다</div>
+    </div>
+    <div class="tc">
+      <div>
+        <div class="slb">왜 지금 시작해야 하는가</div>
+        <div class="ri"><div class="rd"></div><div class="rt">역량·신뢰를 숫자로 증명해야 합니다<span>공기 준수율·하자율 즉시 제시 불가 → 가격 경쟁만 가능</span></div></div>
+        <div class="ri"><div class="rd"></div><div class="rt">수주가 개인에게 종속되어 있습니다<span>담당자 교체 시 관계·노하우 함께 소멸</span></div></div>
+        <div class="ri"><div class="rd"></div><div class="rt">발주처는 빠른 응답을 원합니다<span>자료 취합이 병목 → 늦은 응답 = 기회 손실</span></div></div>
+        <div class="ri"><div class="rd"></div><div class="rt">서류의 양과 정확도가 수주를 결정합니다<span>데이터 없이는 담당자 기억력에 의존하는 구조</span></div></div>
+      </div>
+      <div>
+        <div class="slb">체계화 후 수주에서 얻는 효과</div>
+        <table class="dt">
+          <tr><th>현재 문제</th><th>체계화 후 변화</th></tr>
+          <tr><td>역량 증명 불가</td><td>실적 수치를 제안서에 공식 제시 → 실적 경쟁</td></tr>
+          <tr><td>개인 종속 수주</td><td>발주처 이력 데이터화 → 재수주율 향상</td></tr>
+          <tr><td>느린 견적 응답</td><td>AI 견적 → 빠른 응답 자체가 신뢰</td></tr>
+          <tr><td>서류 품질 의존</td><td>AI가 기술제안서 초안 자동 생성, 담당자는 검토만</td></tr>
+        </table>
+      </div>
+    </div>
+    <div class="hb" style="font-size:13px;">
+      앞으로의 경쟁은 <strong>'누가 AI를 쓰는가'</strong>가 아니라,<br><strong>'누가 학습 가능한 데이터를 가지고 있는가'</strong>에서 결정됩니다
+    </div>
+  </div>
+  <div class="pnum">8 / 10</div>
+</div>
+
+<!-- ======= S9: 온톨로지 로드맵 ======= -->
+<div class="slide" id="s9">
+  <div class="logo"><img src="sanha_logo.png"></div>
+  <div class="si">
+    <div class="sh">
+      <div class="stag">챕터 06</div>
+      <div class="st">온톨로지 기반 데이터 체계화 로드맵</div>
+      <div class="ss">지금 안 쌓으면 나중에 처음부터 시작해야 합니다</div>
+    </div>
+    <div class="stpl">
+      <div class="stpi">
+        <div class="stpb s1">Step 1 · 즉시</div>
+        <div>
+          <div class="stptit">클라우드 서버 구축</div>
+          <div class="stpdesc">개인 PC·이메일·USB에 흩어진 데이터 전수 조사 후 클라우드 이관 · 폴더 구조·파일 네이밍 사내 표준화 · Google Workspace 또는 Microsoft 365로 시작</div>
+        </div>
+      </div>
+      <div class="stpi">
+        <div class="stpb s2">Step 2 · 3~6개월</div>
+        <div>
+          <div class="stptit">데이터 관계 체계 설계 (온톨로지 기반)</div>
+          <div class="stpdesc">건설사 핵심 데이터 간 관계 정의 · 프로젝트 ↔ 발주처 ↔ 계약 ↔ 공정 / 자재 ↔ 공급업체 ↔ 단가 / 인력 ↔ 현장 ↔ 하자이력</div>
+        </div>
+      </div>
+      <div class="stpi">
+        <div class="stpb s3">Step 3 · 6~12개월</div>
+        <div>
+          <div class="stptit">데이터 입력·관리 표준화 <span style="font-size:10px; color:var(--muted); font-weight:400; margin-left:6px;">"입력하는 사람마다 다른 데이터"를 제거하는 단계</span></div>
+          <div class="stpdesc">현장·본사 공통 코드 체계 구축 · 공종·자재·협력업체 명칭 표준화 · 사진·도면·회의록 파일명 규칙 통일 · 모바일 기반 현장 입력 체계 · 입력 즉시 본사 DB 자동 반영</div>
+        </div>
+      </div>
+      <div class="stpi">
+        <div class="stpb s4">Step 4 · 12개월+</div>
+        <div>
+          <div class="stptit">AI와 데이터 연결 — 지식 그래프 고도화</div>
+          <div class="stpdesc">하자 패턴 기반 위험 자재 자동 식별 · 반복 하자 협력업체 조기 식별 · 공종별 원가 편차 자동 분석 · 현장별 공기 지연 원인 누적 분석</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pnum">9 / 10</div>
+</div>
+
+<!-- ======= S10: 의사결정 ======= -->
+<div class="slide" id="s10">
+  <div class="logo"><img src="sanha_logo.png"></div>
+  <div class="si">
+    <div class="sh">
+      <div class="stag">챕터 07</div>
+      <div class="st">지금 결정이 필요한 4가지</div>
+      <div class="ss">아래 항목은 경영진의 결단이 선행되어야 합니다 · 직원·실무진의 노력만으로 해결될 수 없습니다</div>
+    </div>
+    <div class="dg">
+      <div class="dc">
+        <div style="display:flex; align-items:center; gap:10px;"><div class="dn">1</div><div class="dtit">1차 목표 공식 합의</div></div>
+        <div class="dact">AI 활용의 1차 목표를 "업무 부담 감소 · 업무 시간 단축"으로 공식 규정</div>
+        <div class="dwhy">목표가 모호하면 직원은 움직이지 않습니다. 구체적 목표가 생겨야 자발적 동기가 만들어집니다.</div>
+      </div>
+      <div class="dc">
+        <div style="display:flex; align-items:center; gap:10px;"><div class="dn">2</div><div class="dtit">AI 도구 구독 예산 승인</div></div>
+        <div class="dact">단계별 예산 승인 · 현재 0원 → 9만원 → 40~60만원 → 100만원+</div>
+        <table class="mt">
+          <tr><th>단계</th><th>대상</th><th>월 예산</th></tr>
+          <tr><td>즉시</td><td>본부별 담당자 4명</td><td>약 9만원</td></tr>
+          <tr><td>2단계</td><td>전직원 20명</td><td>40~60만원</td></tr>
+          <tr><td>3단계</td><td>전직원 고급 플랜</td><td>100만원+</td></tr>
+        </table>
+      </div>
+      <div class="dc">
+        <div style="display:flex; align-items:center; gap:10px;"><div class="dn">3</div><div class="dtit">임원진 우선 AI 교육 참여</div></div>
+        <div class="dact">직원 강의에 앞서 임원진 대상 별도 체험 세션 1회 실시</div>
+        <div class="dwhy">임원이 먼저 써봐야 기존 보고 양식을 고집하지 않습니다. 이중일 구조를 막는 가장 확실한 방법입니다.</div>
+      </div>
+      <div class="dc">
+        <div style="display:flex; align-items:center; gap:10px;"><div class="dn">4</div><div class="dtit">파일럿 부서 권한 위임</div></div>
+        <div class="dact">경영기획실을 파일럿 부서로 지정 · 보고 양식·결재 절차 일부 면제</div>
+        <div class="dwhy">기획실이 자유롭게 실험하고 결과를 측정해야 전사 확산의 근거가 만들어집니다.</div>
+      </div>
+    </div>
+    <div class="fb">
+      작은 결단 4가지가 <span>산하에코를 AI 건설 기업으로 가는 첫 걸음</span>을 만듭니다
+    </div>
+  </div>
+  <div class="pnum">10 / 10</div>
+</div>
+
+</div><!-- end .pres -->
+
+<div class="nav">
+  <button class="nbtn" id="prev" onclick="go(-1)" disabled>← 이전</button>
+  <span class="ncnt" id="cnt">1 / 10</span>
+  <button class="nbtn" id="next" onclick="go(1)">다음 →</button>
+</div>
+<div class="prog-wrap" id="pw" style="width:1280px;">
+  <div class="prog-fill" id="pf" style="width:10%;"></div>
+</div>
+
+<script>
+const slides = document.querySelectorAll('.slide');
+const total = slides.length;
+let cur = 0;
+
+function go(d) {
+  slides[cur].classList.remove('active');
+  cur = Math.max(0, Math.min(total - 1, cur + d));
+  slides[cur].classList.add('active');
+  document.getElementById('cnt').textContent = (cur + 1) + ' / ' + total;
+  document.getElementById('prev').disabled = cur === 0;
+  document.getElementById('next').disabled = cur === total - 1;
+  document.getElementById('pf').style.width = ((cur + 1) / total * 100) + '%';
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') go(1);
+  if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   go(-1);
+});
+
+function scale() {
+  const pres = document.getElementById('pres');
+  const pw   = document.getElementById('pw');
+  const s = Math.min(
+    (window.innerWidth - 32) / 1280,
+    (window.innerHeight - 120) / 720
+  );
+  const clamped = Math.min(s, 1);
+  pres.style.transform = 'scale(' + clamped + ')';
+  pres.style.transformOrigin = 'top center';
+  pres.style.marginBottom = ((720 * clamped) - 720) + 'px';
+  pw.style.width = Math.min(1280 * clamped, 1280) + 'px';
+}
+scale();
+window.addEventListener('resize', scale);
+</script>
+</body>
+</html>
