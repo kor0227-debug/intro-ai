@@ -785,29 +785,46 @@ body {
   background: linear-gradient(transparent 60%, rgba(27,117,188,0.18) 60%);
 }
 
+@page {
+  size: 13.333in 7.5in;
+  margin: 0;
+}
+
 @media print {
+  html,
   body {
+    width: 13.333in;
+    height: 7.5in;
     display: block;
     background: #fff;
     overflow: visible;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
   }
   .presentation,
   .slide-container {
-    width: auto;
+    width: 1280px;
     height: auto;
     display: block;
     transform: none !important;
   }
   .slide {
     position: relative;
+    width: 1280px;
+    height: 720px;
     display: flex !important;
+    overflow: hidden;
     page-break-after: always;
     break-after: page;
     box-shadow: none;
     transform: none !important;
   }
+  .slide:last-child {
+    page-break-after: auto;
+    break-after: auto;
+  }
   .nav-bar {
-    display: none;
+    display: none !important;
   }
 }
 </style>
