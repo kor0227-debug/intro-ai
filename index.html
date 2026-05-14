@@ -444,14 +444,6 @@ body {
 }
 .nav-btn:hover { background: rgba(255,255,255,0.2); color: #fff; }
 .nav-btn:disabled { opacity: 0.3; cursor: not-allowed; }
-.print-btn {
-  background: var(--hero);
-  border-color: rgba(255,255,255,0.18);
-  color: #fff;
-}
-.print-btn:hover {
-  filter: brightness(1.08);
-}
 .nav-dots {
   display: flex;
   gap: 6px;
@@ -1701,7 +1693,6 @@ body {
   <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)" disabled>← 이전</button>
   <div class="nav-dots" id="navDots"></div>
   <span class="slide-counter" id="slideCounter">1 / 17</span>
-  <button class="nav-btn print-btn" onclick="downloadPdf()">PDF 저장</button>
   <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">다음 →</button>
 </nav>
 
@@ -1734,10 +1725,6 @@ function goTo(n) {
 }
 
 function changeSlide(dir) { goTo(current + dir); }
-
-function downloadPdf() {
-  window.print();
-}
 
 document.addEventListener('keydown', e => {
   if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') { e.preventDefault(); changeSlide(1); }
