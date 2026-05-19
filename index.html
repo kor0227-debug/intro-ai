@@ -1488,93 +1488,52 @@ body {
 
   <div class="slide-body" style="display:flex;flex-direction:column;gap:8px;overflow:hidden;">
 
-    <!-- 상단: 4개 문제 카드 -->
-    <div class="grid-4" style="flex-shrink:0;gap:8px;">
-      <div class="card" style="padding:12px 14px;border-top:3px solid var(--green);display:flex;flex-direction:column;gap:5px;">
-        <div style="font-size:18px;font-weight:700;color:var(--text-main);">자료 검색 시간 증가</div>
-        <div style="font-size:14px;color:var(--text-sub);line-height:1.4;">계약서·공문·도면·회의록이 개인 PC·이메일·메신저에 분산</div>
+    <!-- 상단: 현재 상태 요약 -->
+    <div class="card" style="flex-shrink:0;padding:12px 18px;border-left:4px solid var(--green);border-radius:4px 10px 10px 4px;display:flex;align-items:center;gap:18px;">
+      <div style="font-size:17px;font-weight:800;color:var(--green-deep);white-space:nowrap;">현재 상태 요약</div>
+      <div style="font-size:15px;color:var(--text-sub);line-height:1.55;flex:1;">계약서·공문·도면·회의록·현장 데이터는 존재하지만, 개인 PC·이메일·메신저·폴더에 분산되어 바로 검색하거나 AI가 읽기 어려운 상태입니다.</div>
+    </div>
+
+    <!-- 중단: 4단계 로드맵 -->
+    <div style="flex:1;min-height:0;display:flex;align-items:stretch;gap:8px;">
+      <div class="card" style="flex:1;padding:18px 16px;border-top:4px solid var(--green);display:flex;flex-direction:column;gap:10px;">
+        <div style="font-size:12px;font-weight:800;color:var(--green-deep);letter-spacing:0.04em;">Step 1</div>
+        <div style="font-size:22px;font-weight:800;color:var(--text-main);">자료 통합</div>
+        <div style="font-size:14px;color:var(--text-sub);line-height:1.55;">공통 클라우드 저장소로 자료를 모으고 파일명·폴더 구조를 표준화합니다.</div>
+        <div style="margin-top:auto;background:var(--bg-success);border-radius:8px;padding:9px 10px;font-size:13px;font-weight:700;color:var(--green-deep);line-height:1.45;">개인 PC·이메일 자료 수집<br>공통 클라우드로 이관</div>
       </div>
-      <div class="card" style="padding:12px 14px;border-top:3px solid var(--blue);display:flex;flex-direction:column;gap:5px;">
-        <div style="font-size:18px;font-weight:700;color:var(--text-main);">노하우 개인 종속</div>
-        <div style="font-size:14px;color:var(--text-sub);line-height:1.4;">협의 이력·판단 근거가 담당자 기억과 파일에만 남음</div>
+      <div style="display:flex;align-items:center;color:var(--text-muted);font-size:22px;font-weight:700;">→</div>
+      <div class="card" style="flex:1;padding:18px 16px;border-top:4px solid var(--blue);display:flex;flex-direction:column;gap:10px;">
+        <div style="font-size:12px;font-weight:800;color:var(--blue-deep);letter-spacing:0.04em;">Step 2</div>
+        <div style="font-size:22px;font-weight:800;color:var(--text-main);">분류 체계</div>
+        <div style="font-size:14px;color:var(--text-sub);line-height:1.55;">프로젝트·계약·공정·원가 데이터를 기준별로 묶고 관계를 정리합니다.</div>
+        <div style="margin-top:auto;background:var(--bg-info);border-radius:8px;padding:9px 10px;font-size:13px;font-weight:700;color:var(--blue-deep);line-height:1.45;">프로젝트·계약·공정 연결<br>원가 데이터 관계 정리</div>
       </div>
-      <div class="card" style="padding:12px 14px;border-top:3px solid #7B5EA7;display:flex;flex-direction:column;gap:5px;">
-        <div style="font-size:18px;font-weight:700;color:var(--text-main);">문서 작성 반복</div>
-        <div style="font-size:14px;color:var(--text-sub);line-height:1.4;">유사한 보고서·공문·검토자료가 계속 반복 발생</div>
+      <div style="display:flex;align-items:center;color:var(--text-muted);font-size:22px;font-weight:700;">→</div>
+      <div class="card" style="flex:1;padding:18px 16px;border-top:4px solid #7B5EA7;display:flex;flex-direction:column;gap:10px;">
+        <div style="font-size:12px;font-weight:800;color:#7B5EA7;letter-spacing:0.04em;">Step 3</div>
+        <div style="font-size:22px;font-weight:800;color:var(--text-main);">입력 표준화</div>
+        <div style="font-size:14px;color:var(--text-sub);line-height:1.55;">프로젝트명·공종·협력업체 등 반복 입력값을 공통 코드로 정리합니다.</div>
+        <div style="margin-top:auto;background:rgba(123,94,167,0.10);border-radius:8px;padding:9px 10px;font-size:13px;font-weight:700;color:#7B5EA7;line-height:1.45;">공종·협력업체 명칭 통일<br>문서 유형 공통 코드화</div>
       </div>
-      <div class="card" style="padding:12px 14px;border-top:3px solid #F59E0B;display:flex;flex-direction:column;gap:5px;">
-        <div style="font-size:18px;font-weight:700;color:var(--text-main);">현장·본사 단절</div>
-        <div style="font-size:14px;color:var(--text-sub);line-height:1.4;">사진·공정·하자·안전 데이터가 흩어져 조기 대응 어려움</div>
+      <div style="display:flex;align-items:center;color:var(--text-muted);font-size:22px;font-weight:700;">→</div>
+      <div style="flex:1;background:#1B2E3C;border-radius:12px;padding:18px 16px;display:flex;flex-direction:column;gap:10px;box-shadow:0 8px 20px rgba(27,46,60,0.16);">
+        <div style="font-size:12px;font-weight:800;color:var(--green-light);letter-spacing:0.04em;">Step 4</div>
+        <div style="font-size:22px;font-weight:800;color:#fff;">AI 연결</div>
+        <div style="font-size:14px;color:rgba(255,255,255,0.78);line-height:1.55;">자연어 검색·요약·초안 생성을 사내 데이터 기반 AI 비서로 연결합니다.</div>
+        <div style="margin-top:auto;background:rgba(255,255,255,0.10);border-radius:8px;padding:9px 10px;font-size:13px;font-weight:700;color:#fff;line-height:1.45;">검색·요약·초안 생성<br>질의응답 자동화</div>
       </div>
     </div>
 
-    <!-- 중단: 비교표 + 4단계 로드맵 -->
-    <div style="display:flex;gap:12px;flex:1;min-height:0;">
-
-      <!-- 좌: As-Is vs To-Be 비교표 -->
-      <div style="flex:1;border-radius:10px;overflow:hidden;border:1px solid var(--border);display:flex;flex-direction:column;">
-        <table style="width:100%;border-collapse:collapse;font-size:16px;table-layout:fixed;height:100%;">
-          <colgroup><col style="width:22%"><col style="width:5%"><col style="width:73%"></colgroup>
-          <thead>
-            <tr>
-              <td style="background:#f0f4f8;padding:7px 12px;font-weight:700;color:var(--text-sub);text-align:center;border-bottom:1px solid var(--border);">현재 문제</td>
-              <td style="background:#f5f5f5;border-bottom:1px solid var(--border);"></td>
-              <td style="background:#1B2E3C;padding:7px 12px;font-weight:700;color:#fff;text-align:center;border-bottom:1px solid var(--border);">체계화 후 변화</td>
-            </tr>
-          </thead>
-          <tbody>
-            <tr style="border-bottom:1px solid var(--border);">
-              <td style="padding:8px 12px;color:var(--text-sub);text-align:center;font-size:14px;">자료 확인에 시간 소요</td>
-              <td style="text-align:center;color:var(--text-muted);font-size:20px;">→</td>
-              <td style="padding:8px 12px;color:var(--blue-deep);font-weight:700;text-align:center;font-size:14px;">계약서·공문·도면·회의록 빠른 검색 → 반복 확인 시간 단축</td>
-            </tr>
-            <tr style="border-bottom:1px solid var(--border);background:#fafafa;">
-              <td style="padding:8px 12px;color:var(--text-sub);text-align:center;font-size:14px;">담당자 변경 시<br>노하우 단절</td>
-              <td style="text-align:center;color:var(--text-muted);font-size:20px;">→</td>
-              <td style="padding:8px 12px;color:var(--blue-deep);font-weight:700;text-align:center;font-size:14px;">협의 이력·판단 근거·업무 노하우 축적 → 업무 연속성 유지</td>
-            </tr>
-            <tr style="border-bottom:1px solid var(--border);">
-              <td style="padding:8px 12px;color:var(--text-sub);text-align:center;font-size:14px;">문서 작성 반복</td>
-              <td style="text-align:center;color:var(--text-muted);font-size:20px;">→</td>
-              <td style="padding:8px 12px;color:var(--blue-deep);font-weight:700;text-align:center;font-size:14px;">과거 문서와 표준 양식 기반 AI 초안 생성 → 담당자는 검토 중심 전환</td>
-            </tr>
-            <tr>
-              <td style="padding:8px 12px;color:var(--text-sub);text-align:center;font-size:14px;">현장 정보 분산</td>
-              <td style="text-align:center;color:var(--text-muted);font-size:20px;">→</td>
-              <td style="padding:8px 12px;color:var(--blue-deep);font-weight:700;text-align:center;font-size:14px;">현장 공정·하자·안전 데이터 연결 → 이슈 조기 파악 및 대응력 향상</td>
-            </tr>
-          </tbody>
-        </table>
+    <!-- 하단: 체계화 후 변화 -->
+    <div style="flex-shrink:0;background:var(--bg-success);border:1px solid var(--green-light);border-radius:10px;padding:10px 18px;">
+      <div style="display:grid;grid-template-columns:0.9fr repeat(4,1fr);gap:8px;align-items:center;">
+        <div style="font-size:15px;font-weight:800;color:var(--green-deep);">체계화 후 변화</div>
+        <div style="background:#fff;border-radius:8px;padding:8px 10px;text-align:center;font-size:14px;font-weight:700;color:var(--text-main);">빠른 검색</div>
+        <div style="background:#fff;border-radius:8px;padding:8px 10px;text-align:center;font-size:14px;font-weight:700;color:var(--text-main);">노하우 축적</div>
+        <div style="background:#fff;border-radius:8px;padding:8px 10px;text-align:center;font-size:14px;font-weight:700;color:var(--text-main);">AI 초안 생성</div>
+        <div style="background:#fff;border-radius:8px;padding:8px 10px;text-align:center;font-size:14px;font-weight:700;color:var(--text-main);">현장 이슈 조기 대응</div>
       </div>
-
-      <!-- 우: 4단계 로드맵 -->
-      <div style="width:480px;display:grid;grid-template-columns:1fr 1fr;gap:8px;">
-        <div class="card" style="padding:14px 16px;border-top:3px solid var(--green);display:flex;flex-direction:column;gap:6px;">
-          <div style="font-size:10px;font-weight:700;color:var(--green-deep);">Step 1</div>
-          <div style="font-size:14px;font-weight:800;color:var(--text-main);">자료 통합</div>
-          <div style="font-size:14px;color:var(--text-sub);line-height:1.4;">공통 클라우드 저장소<br>파일명·폴더 구조 표준화</div>
-        </div>
-        <div class="card" style="padding:14px 16px;border-top:3px solid var(--blue);display:flex;flex-direction:column;gap:6px;">
-          <div style="font-size:10px;font-weight:700;color:var(--blue-deep);">Step 2</div>
-          <div style="font-size:14px;font-weight:800;color:var(--text-main);">분류 체계</div>
-          <div style="font-size:14px;color:var(--text-sub);line-height:1.4;">프로젝트·계약·공정·원가<br>데이터 관계 정리</div>
-        </div>
-        <div class="card" style="padding:14px 16px;border-top:3px solid #7B5EA7;display:flex;flex-direction:column;gap:6px;">
-          <div style="font-size:10px;font-weight:700;color:#7B5EA7;">Step 3</div>
-          <div style="font-size:14px;font-weight:800;color:var(--text-main);">입력 표준화</div>
-          <div style="font-size:14px;color:var(--text-sub);line-height:1.4;">프로젝트명·공종·협력업체<br>공통 코드 체계 구축</div>
-        </div>
-        <div style="background:#1B2E3C;border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:6px;">
-          <div style="font-size:10px;font-weight:700;color:var(--green-light);">Step 4</div>
-          <div style="font-size:14px;font-weight:800;color:#fff;">AI 연결</div>
-          <div style="font-size:14px;color:rgba(255,255,255,0.7);line-height:1.4;">자연어 검색·요약·초안 생성<br>사내 데이터 기반 AI 비서</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 하단: 핵심 메시지 -->
-    <div style="background:var(--bg-success);border:1px solid var(--green-light);border-radius:10px;padding:12px 24px;flex-shrink:0;text-align:center;">
-      <div style="font-size:16px;font-weight:700;color:var(--green-deep);">앞으로의 경쟁은 '누가 AI를 쓰는가'가 아니라, <strong>'누가 AI가 읽을 수 있는 데이터를 갖고 있는가'</strong>에서 결정됩니다.</div>
     </div>
 
   </div>
@@ -1619,7 +1578,7 @@ body {
   </div>
   <div class="slide-headline">경영진 의사결정 요청 3가지</div>
   <div class="headline-rule"></div>
-  <div class="slide-subtitle">목표 합의 → 최소 예산 승인 → 공동 체험, 이 세 가지를 선행해야 AI 도입이 개인의 시도를 넘어 조직의 변화로 이어집니다</div>
+  <div class="slide-subtitle">목표 합의 → Claude 구독 예산 승인 → 공동 체험, 이 세 가지를 선행해야 AI 도입이 개인의 시도를 넘어 조직의 변화로 이어집니다</div>
 
   <div class="slide-body" style="display:flex;flex-direction:column;gap:10px;">
     <div class="grid-3" style="flex:1;min-height:0;gap:12px;">
@@ -1629,14 +1588,14 @@ body {
         <div class="callout" style="font-size:14px;font-weight:400;">요청: <strong>AI 도입 초기 성과는 매출이 아니라, 업무시간 절감으로 측정한다는 기준을 확정</strong></div>
       </div>
       <div class="card" style="border-left:4px solid var(--blue);border-radius:4px 14px 14px 4px;display:flex;flex-direction:column;gap:10px;">
-        <div style="display:flex;align-items:center;gap:8px;"><div class="num-badge blue" style="width:28px;height:28px;font-size:14px;">②</div><div style="font-size:14px;font-weight:700;color:var(--blue-deep);">AI 도구 구독 예산 승인</div></div>
-        <table class="data-table" style="font-size:14px;flex:1;">
+        <div style="display:flex;align-items:center;gap:8px;"><div class="num-badge blue" style="width:28px;height:28px;font-size:14px;">②</div><div style="font-size:14px;font-weight:700;color:var(--blue-deep);">Claude 구독 예산 승인</div></div>
+        <table class="data-table" style="font-size:13px;flex:0 0 auto;">
           <tr><th class="blue-header">단계</th><th class="blue-header">대상</th><th class="blue-header">월 예산</th></tr>
-          <tr><td>1단계</td><td>본부별 담당자 4명</td><td style="font-weight:700;color:var(--green-deep);">약 9만원</td></tr>
-          <tr><td>2단계</td><td>전 직원 20명</td><td style="font-weight:700;color:var(--blue-deep);">40~60만원</td></tr>
-          <tr><td>3단계</td><td>고급 플랜·자동화</td><td style="font-weight:700;color:var(--blue-deep);">100만원+</td></tr>
+          <tr><td>1단계</td><td>전 직원 20명</td><td style="font-weight:700;color:var(--green-deep);">약 90만원</td></tr>
+          <tr><td>2단계</td><td>사용량 기반 시트 조정</td><td style="font-weight:700;color:var(--blue-deep);">최대 90만원</td></tr>
+          <tr><td>3단계</td><td>Premium 확대·자동화</td><td style="font-weight:700;color:var(--blue-deep);">120~130만원</td></tr>
         </table>
-        <div class="callout blue" style="font-size:14px;font-weight:400;">요청: <strong>최소 비용 파일럿 예산부터 승인해 실제 시간 절감 효과를 측정</strong></div>
+        <div class="callout blue" style="font-size:14px;font-weight:400;min-height:54px;margin-top:auto;display:flex;align-items:center;text-align:left;line-height:1.5;">요청: <strong>1단계 Claude 20명 구독 예산 월 90만원 승인</strong></div>
       </div>
       <div class="card" style="border-left:4px solid var(--green-strong);border-radius:4px 14px 14px 4px;display:flex;flex-direction:column;gap:10px;">
         <div style="display:flex;align-items:center;gap:8px;"><div class="num-badge" style="width:28px;height:28px;font-size:14px;background:var(--green-strong);">③</div><div style="font-size:16px;font-weight:700;color:var(--green-deep);">AI 업무 방식 전환 체험 세션</div></div>
@@ -1646,7 +1605,7 @@ body {
     </div>
     <div class="callout dark" style="font-size:14px;font-weight:400;padding:14px 20px;flex-shrink:0;">
       지금 필요한 것은 거창한 AI 시스템 구축이 아닙니다.<br>
-      <strong>먼저 작은 범위에서 AI를 활용해 기존 업무 방식의 한계를 넘는 새로운 방식을 실험해야 합니다.</strong>
+      <strong>먼저 전 직원이 같은 도구를 쓰는 환경을 만들고, 기존 업무 방식의 한계를 넘는 새로운 방식을 실험해야 합니다.</strong>
     </div>
   </div>
 
